@@ -2,7 +2,7 @@ import React from "react";
 import drone from "./assets/drone.svg";
 import PilotInfo from "./components/PilotInfo";
 import Footer from "./components/Footer";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (

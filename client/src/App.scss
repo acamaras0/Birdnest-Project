@@ -1,3 +1,5 @@
+@import 'loaders.css/src/animations/ball-scale-ripple-multiple.scss';
+
 .App {
   text-align: center;
 }
@@ -24,7 +26,6 @@
   color: white;
   padding-bottom: 15px;
 }
-
 
 @keyframes App-logo-spin {
   from {
