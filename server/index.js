@@ -12,7 +12,6 @@ const db = require("./db/database");
 const { XMLParser } = require("fast-xml-parser");
 const parser = new XMLParser();
 
-
 const getPilotInfo = require("./utils/getPilotInfo");
 const getDistance = require("./utils/getDistance");
 
@@ -30,12 +29,17 @@ app.get("/pilot-info", async (req, res) => {
       }
       getPilotInfo(baseUrl, serialNumbers);
     }
+
+    sql = `SELECT * FROM pilots WHERE timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
   });
 
-  sql = `SELECT * FROM pilots WHERE timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+  sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
   db.query(sql, (err, result) => {
     if (err) throw err;
-    res.send(result);
   });
 });
 
