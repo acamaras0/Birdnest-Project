@@ -16,6 +16,12 @@ const getPilotInfo = require("./utils/getPilotInfo");
 const getDistance = require("./utils/getDistance");
 
 app.get("/pilot-info", async (req, res) => {
+  sql = `SELECT * FROM pilots WHERE timestamp > DATE_SUB(NOW(), INTERVAL 11 MINUTE)`;
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+
   axios.get(baseUrl + "drones").then((xml) => {
     let json = parser.parse(xml.data);
     let droneInfo = json.report.capture;
@@ -26,18 +32,12 @@ app.get("/pilot-info", async (req, res) => {
       if (distance <= 100000) {
         serialNumbers = [...serialNumbers, drone.serialNumber];
         console.table(drone);
+        getPilotInfo(baseUrl, serialNumbers, distance);
       }
-      getPilotInfo(baseUrl, serialNumbers);
     }
-
-    sql = `SELECT * FROM pilots WHERE timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
-    db.query(sql, (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    });
   });
 
-  sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+  sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 20 MINUTE)`;
   db.query(sql, (err, result) => {
     if (err) throw err;
   });

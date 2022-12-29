@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "react-loaders";
+import { format } from "timeago.js";
 import axios from "axios";
 
 const PilotInfo = () => {
@@ -26,7 +27,6 @@ const PilotInfo = () => {
   } else {
     return (
       <>
-        <h3>Pilots in the NDZ</h3>
         <h4 style={{ fontStyle: "italic" }}>
           The NDZ perimeter was violated within the last 10 minutes by:
         </h4>
@@ -36,6 +36,8 @@ const PilotInfo = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Intercepted</th>
+              <th>Seen</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +49,11 @@ const PilotInfo = () => {
                   </td>
                   <td> {pilot.email} </td>
                   <td> {pilot.phone} </td>
+                  <td style={{ color: "red" }}>
+                    {" "}
+                    {Math.round(pilot.distance / 1000)}m away{" "}
+                  </td>
+                  <td> {format(pilot.timestamp)}</td>
                 </tr>
               ))}
           </tbody>
