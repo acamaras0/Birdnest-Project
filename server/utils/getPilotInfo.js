@@ -16,10 +16,10 @@ function getPilotInfo(baseUrl, serialNumbers, distance) {
         db.query(sql, (err, result) => {
           if (err) throw err;
           if (result.length > 0 || !result) {
-            sql = `UPDATE pilots SET firstname = '${firstname}', lastname = '${lastname}', email = '${email}', distance = '${distance}'' WHERE phone = '${phone}'`;
+            sql = `UPDATE pilots SET firstname = '${firstname}', lastname = '${lastname}', email = '${email}', distance = '${distance}', serialNumber = '${element}' WHERE phone = '${phone}'`;
             console.log("Pilot info updated!");
           } else {
-            sql = `INSERT INTO pilots (firstname, lastname, email, phone, distance) VALUES ('${firstname}', '${lastname}', '${email}', '${phone}', '${distance}')`;
+            sql = `INSERT INTO pilots (firstname, lastname, email, phone, distance, serialNumber) VALUES ('${firstname}', '${lastname}', '${email}', '${phone}', '${distance}', '${element}')`;
             db.query(sql, (err, result) => {
               if (err) throw err;
               console.log("Pilot info inserted!");

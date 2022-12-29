@@ -15,6 +15,8 @@ const PilotInfo = () => {
     }, 20000);
   }, []);
 
+  console.log(pilotInfo);
+
   if (pilotInfo.length === 0) {
     return (
       <>

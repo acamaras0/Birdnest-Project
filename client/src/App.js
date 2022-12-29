@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         <img src={drone} className="App-logo" alt="logo" />
         <h2>Drone Surveillance System</h2>
-        <PilotInfo />
+      <PilotInfo />
       </header>
       <Footer />
     </div>
