@@ -1,13 +1,11 @@
 const axios = require("axios");
 const db = require("../db/database");
 
-function getPilotInfo(serialNumbers) {
+function getPilotInfo(baseUrl, serialNumbers) {
   let pilotInfo = [];
-  if (!serialNumbers) return;
-  serialNumbers.forEach((element) => {
-    axios
-      .get(`https://assignments.reaktor.com/birdnest/pilots/${element}`)
-      .then((res) => {
+  if (serialNumbers) {
+    serialNumbers.forEach((element) => {
+      axios.get(baseUrl + `pilots/` + element).then((res) => {
         pilotInfo = res.data;
         let firstname = pilotInfo.firstName.replace("'", "\\'");
         let lastname = pilotInfo.lastName.replace("'", "\\'");
@@ -19,7 +17,7 @@ function getPilotInfo(serialNumbers) {
           if (err) throw err;
           if (result.length > 0) {
             sql = `UPDATE pilots SET firstname = '${firstname}', lastname = '${lastname}', email = '${email}' WHERE phone = '${phone}'`;
-            console.log("Pilot info already exists!");
+            console.log("Pilot info updated!");
           } else {
             sql = `INSERT INTO pilots (firstname, lastname, email, phone) VALUES ('${firstname}', '${lastname}', '${email}', '${phone}')`;
             db.query(sql, (err, result) => {
@@ -29,7 +27,8 @@ function getPilotInfo(serialNumbers) {
           }
         });
       });
-  });
+    });
+  }
 }
 
 module.exports = getPilotInfo;

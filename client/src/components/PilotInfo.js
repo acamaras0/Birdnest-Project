@@ -27,7 +27,9 @@ const PilotInfo = () => {
     return (
       <>
         <h3>Pilots in the NDZ</h3>
-        <h4>The NDZ perimeter was violated within the last 10 minutes by:</h4>
+        <h4 style={{ fontStyle: "italic" }}>
+          The NDZ perimeter was violated within the last 10 minutes by:
+        </h4>
         <table>
           <thead>
             <tr>
