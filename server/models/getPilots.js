@@ -15,8 +15,6 @@ const getPilots = (req, res) => {
     axios.get(baseUrl + "drones").then((xml) => {
         let json = parser.parse(xml.data);
         let droneInfo = json.report.capture;
-        // let device = json.report.deviceInformation;
-    
         let serialNumbers = [];
         for (const drone of droneInfo.drone) {
           let distance = getDistance(drone.positionX, drone.positionY);
@@ -28,7 +26,7 @@ const getPilots = (req, res) => {
         }
       });
     
-      sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 11 MINUTE)`;
+      sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
       db.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result);
