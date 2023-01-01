@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from "react";
+import PilotInfo from "../../models/PilotInfo";
+import DroneInfo from "../../models/DroneInfo";
 import Loader from "react-loaders";
-import { format } from "timeago.js";
 import axios from "axios";
+import { BsPersonFill } from "react-icons/bs";
+import {GiDeliveryDrone} from "react-icons/gi";
+import "./Dashboard.css";
 
-const PilotInfo = () => {
-  const [pilotInfo, setPilotInfo] = useState([]);
+const Dashboard = () => {
+  const [info, setInfo] = useState([]);
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
-    const getPilotInfo = async () => {
+    const getInfo = async () => {
       const res = await axios.get("http://localhost:3001/");
-      setPilotInfo(res.data);
+      setInfo(res.data);
     };
     setInterval(() => {
-      getPilotInfo();
-    }, 20000);
+      getInfo();
+    }, 40000);
   }, []);
 
-  if (pilotInfo.length === 0) {
+  const handleClick = (id) => (e) => {
+    e.preventDefault();
+    if (id === 1) setShow(false);
+    else setShow(true);
+  };
+
+  if (info.length === 0) {
     return (
       <>
-        <h3 style={{ paddingBottom: "30px" }}>
+        <h3 style={{ paddingBottom: "40px" , color: "#004849" }}>
           Searching for pilots in the NDZ
         </h3>
         <Loader type="ball-scale-ripple-multiple" />
@@ -27,40 +39,37 @@ const PilotInfo = () => {
   } else {
     return (
       <>
-        <span style={{ fontStyle: "italic" }}>
-          The NDZ perimeter was violated within the last 10 minutes by:
-        </span>
         <br />
         <div className="list">
-          {pilotInfo &&
-            pilotInfo.map((pilot) => (
-              <div key={pilot.id}>
-                <div className="card text-center">
+          {info &&
+            info.map((pilot) => (
+              <div key={pilot.id} className="dashboard">
+                <div className="card text-center" style={{ width: "80rem" }}>
                   <div className="card-header">
                     <ul className="nav nav-pills card-header-pills">
-                      <li className="nav-item">
-                        <a className="nav-link active" href="#">
-                          Contact
-                        </a>
+                      <li
+                        className="nav-item text-center"
+                        style={{ cursor: "pointer", width: "100px" }}
+                      >
+                        <BsPersonFill
+                          onClick={handleClick(1)}
+                          className="icon"
+                        />
                       </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="#">
-                          Device
-                        </a>
+                      {" . . . "}
+                      <li
+                        className="nav-item"
+                        style={{ cursor: "pointer", width: "100px" }}
+                      >
+                        <GiDeliveryDrone onClick={handleClick(2)} className="icon" />
                       </li>
                     </ul>
                   </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {pilot.firstname} {pilot.lastname}
-                    </h5>
-                    <p className="card-text">{pilot.phone}</p>
-                    <p className="card-text">{pilot.email}</p>
-                    <p className="card-text">
-                      {Math.round(pilot.distance / 1000)}m away
-                    </p>
-                    <p className="card-text">{format(pilot.timestamp)}</p>
-                  </div>
+                  {show === false ? (
+                    <PilotInfo pilot={pilot} />
+                  ) : (
+                    <DroneInfo pilot={pilot} />
+                  )}
                 </div>
                 <br />
               </div>
@@ -71,4 +80,4 @@ const PilotInfo = () => {
   }
 };
 
-export default PilotInfo;
+export default Dashboard;

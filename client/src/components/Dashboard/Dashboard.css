@@ -1,0 +1,10 @@
+.card-header {
+  display: flex;
+  justify-content: center;
+}
+
+.icon{
+    width: 30px;
+    height: 30px;
+    color:#383838;
+}

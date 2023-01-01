@@ -3,6 +3,16 @@
   pointer-events: none;
 }
 
+.nav-icon{
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5vw;
+  margin-left: 0.5vw;
+  margin-bottom: 2px;
+  color:#00babb;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .nav-logo {
     animation: nav-logo-spin infinite 5s linear;
