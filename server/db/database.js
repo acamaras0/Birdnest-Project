@@ -1,10 +1,12 @@
 const mysql = require("mysql2");
 
+const {U, PASS, HOST} = process.env;
+
 // create the connection to database
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "123456",
+  user: U,
+  host: HOST,
+  password: PASS,
 });
 
 db.connect(function (err) {
@@ -22,6 +24,7 @@ db.connect(function (err) {
     console.log("Using drones_db.");
   });
 
+  // Create tables
   db.query(
     "CREATE TABLE IF NOT EXISTS pilots (id INT AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255) , email VARCHAR(255), phone VARCHAR(255), distance DOUBLE, serialNumber VARCHAR(255),timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)",
     (err, result) => {

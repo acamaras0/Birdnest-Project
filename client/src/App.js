@@ -1,19 +1,18 @@
 import React from "react";
-import drone from "./assets/drone.svg";
-import PilotInfo from "./components/PilotInfo";
-import Footer from "./components/Footer";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
 import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={drone} className="App-logo" alt="logo" />
-        <h2>Drone Surveillance System</h2>
-      <PilotInfo />
-      </header>
+    <>
+      <Navbar />
+      <div className="App">
+        <Dashboard />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

@@ -4,7 +4,7 @@ function getDroneInfo(drone) {
   let sql = `SELECT * FROM drones WHERE serialNumber = '${drone.serialNumber}'`;
   db.query(sql, (err, result) => {
     if (err) throw err;
-    if (result.length > 0 || !result) {
+    if (result.length > 0 || result != "") {
       sql = `UPDATE drones SET model = '${drone.model}', manufacturer = '${drone.manufacturer}', mac = '${drone.mac}', ipv4 = '${drone.ipv4}', ipv6 = '${drone.ipv6}', firmware = '${drone.firmware}' WHERE serialNumber = '${drone.serialNumber}'`;
       console.log("Drone info updated!");
     } else {

@@ -1,37 +1,14 @@
 @import "loaders.css/src/animations/ball-scale-ripple-multiple.scss";
 
 .App {
+  width: auto;
   text-align: center;
-}
-
-.App-logo {
-  height: 15vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 5s linear;
-  }
-}
-
-.App-header {
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(3px + 2vmin);
-  color: white;
+  font-size: calc(2px + 2vmin);
   padding-bottom: 15px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

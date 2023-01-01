@@ -1,0 +1,19 @@
+.nav-logo {
+  height: 8vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-logo {
+    animation: nav-logo-spin infinite 5s linear;
+  }
+}
+
+@keyframes nav-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

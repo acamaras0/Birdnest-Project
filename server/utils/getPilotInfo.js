@@ -12,10 +12,10 @@ function getPilotInfo(baseUrl, serialNumbers, distance) {
         let email = pilotInfo.email.replace("'", "\\'");
         let phone = pilotInfo.phoneNumber;
 
-        let sql = `SELECT * FROM pilots WHERE phone = '${phone}'`;
+        let sql = `SELECT * FROM pilots WHERE phone = '${phone}' AND serialNumber = '${element}'`;
         db.query(sql, (err, result) => {
           if (err) throw err;
-          if (result.length > 0 || !result) {
+          if (result.length > 0 || result != "") {
             sql = `UPDATE pilots SET firstname = '${firstname}', lastname = '${lastname}', email = '${email}', distance = '${distance}', serialNumber = '${element}' WHERE phone = '${phone}'`;
             console.log("Pilot info updated!");
           } else {

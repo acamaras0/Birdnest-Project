@@ -1,6 +1,8 @@
+import "./Footer.css"
+
 const Footer = () => {
   return (
-    <div>
+    <div className="footer">
       <footer>
         <p>© 2023 Anamaria Camarasan</p>
       </footer>
