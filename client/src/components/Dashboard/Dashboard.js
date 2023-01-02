@@ -18,7 +18,7 @@ const Dashboard = () => {
     };
     setInterval(() => {
       getInfo();
-    }, 40000);
+    }, 20000);
   }, []);
 
   const handleClick = (id) => (e) => {

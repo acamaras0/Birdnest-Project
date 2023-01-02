@@ -1,4 +1,12 @@
+$primary-color: #ffffff;
 @import "loaders.css/src/animations/ball-scale-ripple-multiple.scss";
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
 
 .App {
   background-color: #dcd9d4;

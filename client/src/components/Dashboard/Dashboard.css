@@ -8,3 +8,10 @@
     height: 30px;
     color:#383838;
 }
+
+@media screen and (max-width: 900px) {
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+}

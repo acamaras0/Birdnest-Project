@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Navbar.css";
 import drone from "../../assets/drone.svg";
 import { format } from "timeago.js";
 import { MdUpdate, MdTimer, MdBatteryCharging80 } from "react-icons/md";
 import { HiStatusOnline } from "react-icons/hi";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [deviceInfo, setDeviceInfo] = useState([]);
@@ -29,26 +29,24 @@ const Navbar = () => {
             <div>
               <HiStatusOnline className="nav-icon" />
               <span className="navbar-text">
-                {deviceInfo.listenRange / 1000}m
+                {deviceInfo.length !== 0 && deviceInfo.listenRange / 1000}m
               </span>
             </div>
             <div>
               <MdTimer className="nav-icon" />
               <span className="navbar-text">
-                {format(deviceInfo.deviceStarted)}
+                {deviceInfo.length !== 0 && format(deviceInfo.deviceStarted)}
               </span>
             </div>
             <div>
               <MdUpdate className="nav-icon" />
               <span className="navbar-text">
-                {deviceInfo.updateIntervalMs / 1000}s
+                {deviceInfo.length !== 0 && deviceInfo.updateIntervalMs / 1000 }s
               </span>
             </div>
             <div>
               <MdBatteryCharging80 className="nav-icon" />
-              <span className="navbar-text">
-               77%
-              </span>
+              <span className="navbar-text">77%</span>
             </div>
           </div>
         </nav>
