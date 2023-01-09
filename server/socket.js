@@ -5,9 +5,9 @@ const { XMLParser } = require("fast-xml-parser");
 const parser = new XMLParser();
 const baseUrl = "https://assignments.reaktor.com/birdnest/";
 
-const getPilotInfo = require("./utils/getPilotInfo");
 const getDistance = require("./utils/getDistance");
-const getDroneInfo = require("./utils/getDroneInfo");
+const insertPilotInfo = require("./utils/insertPilotInfo");
+const insertDroneInfo = require("./utils/insertDroneInfo");
 
 /**
  ** In order to get less network request, I decided to pass the
@@ -38,8 +38,8 @@ const socketServer = (server) => {
 					);
 					if (distance < 100000) {
 						serialNumbers = [...serialNumbers, drone.serialNumber];
-						getPilotInfo(baseUrl, serialNumbers, distance);
-						getDroneInfo(drone);
+						insertPilotInfo(baseUrl, serialNumbers, distance);
+						insertDroneInfo(drone);
 					}
 				}
 			});

@@ -40,7 +40,7 @@ const Dashboard = ({ socket }) => {
 				<div className="list">
 					{info &&
 						info.map((pilot) => (
-							<div key={pilot.id} className="dashboard">
+							<div key={pilot.serialNumber} className="dashboard">
 								<div
 									className="card text-center"
 									style={{ width: "80rem" }}
