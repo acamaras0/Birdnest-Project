@@ -8,8 +8,8 @@
 	top: 50%;
 	left: 50%;
 	margin: -117px;
-	width: 248px;
-	height: 248px;
+	width: 250px;
+	height: 250px;
 	border-radius: 50%;
 	box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5),
 		inset 0 0 0 1px hsla(0, 0%, 100%, 0.15);
@@ -58,11 +58,12 @@
 }
 
 .dot {
-	width: 10px;
-	height: 10px;
+	width: 8px;
+	height: 8px;
 	background-color: red;
 	border-radius: 50%;
-	/* z-index: 99999; */
+	color: aliceblue;
+	font-size: 8px;
 }
 @keyframes sweep {
 	to {

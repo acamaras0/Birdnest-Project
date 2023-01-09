@@ -31,6 +31,7 @@ const socketServer = (server) => {
 				let json = parser.parse(xml.data);
 				let droneInfo = json.report.capture;
 				let serialNumbers = [];
+				let positions = [];
 				for (const drone of droneInfo.drone) {
 					let distance = getDistance(
 						drone.positionX,
@@ -40,6 +41,12 @@ const socketServer = (server) => {
 						serialNumbers = [...serialNumbers, drone.serialNumber];
 						insertPilotInfo(baseUrl, serialNumbers, distance);
 						insertDroneInfo(drone);
+						positions.push({
+							serialNumber: drone.serialNumber,
+							positionX: drone.positionX,
+							positionY: drone.positionY,
+						});
+						io.emit("radar", positions);
 					}
 				}
 			});

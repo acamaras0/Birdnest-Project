@@ -25,10 +25,6 @@ const Dashboard = ({ socket }) => {
 		else setShow(true);
 	};
 
-	if (pilots) {
-		pilots.sort((a, b) => a.timestamp > b.timestamp);
-	}
-
 	if (pilots.length === 0) {
 		return (
 			<>
@@ -42,7 +38,7 @@ const Dashboard = ({ socket }) => {
 		return (
 			<>
 				<div className="radar-dashboard">
-					<Radar pilots={pilots} />
+					<Radar socket={socket} />
 				</div>
 				<br />
 				<div className="list">
