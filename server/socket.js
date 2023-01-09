@@ -9,6 +9,15 @@ const getPilotInfo = require("./utils/getPilotInfo");
 const getDistance = require("./utils/getDistance");
 const getDroneInfo = require("./utils/getDroneInfo");
 
+/**
+ ** In order to get less network request, I decided to pass the
+ ** pilots data to the client through sockets.
+ ** Every 2 seconds a get request will be done to the XML url
+ ** and the pilots (and their drones) that got closer than 100m from the nest
+ ** will be added to database.
+ ** After that the socket will emit the new array of the pilots to be shown to the client
+ **/
+
 const socketServer = (server) => {
 	const io = new Server(server, {
 		cors: {

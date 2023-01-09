@@ -8,7 +8,7 @@ app.use(cors());
 
 require("dotenv").config();
 const router = require("./routes/router");
-const port = 5001;
+const port = process.env.PORT || 3001;
 
 app.use(router);
 

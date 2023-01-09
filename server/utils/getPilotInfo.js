@@ -1,6 +1,11 @@
 const axios = require("axios");
 const db = require("../db/database");
 
+/**
+ ** This function will insert/update the pilots data in the table
+ ** after a get request to the json url
+ **/
+
 function getPilotInfo(baseUrl, serialNumbers, distance) {
 	let pilotInfo = [];
 	if (serialNumbers) {

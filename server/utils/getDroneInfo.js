@@ -1,5 +1,9 @@
 const db = require("../db/database");
 
+/**
+ ** This function adds or updates the drones table
+ **/
+
 function getDroneInfo(drone) {
 	let sql = `SELECT * FROM drones WHERE serialNumber = '${drone.serialNumber}'`;
 	db.query(sql, (err, result) => {
