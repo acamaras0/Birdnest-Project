@@ -24,6 +24,10 @@ const Dashboard = ({ socket }) => {
 		else setShow(true);
 	};
 
+	if (info) {
+		info.sort((a, b) => a.timestamp > b.timestamp);
+	}
+
 	if (info.length === 0) {
 		return (
 			<>
