@@ -6,12 +6,12 @@ const { XMLParser } = require("fast-xml-parser");
 const parser = new XMLParser();
 
 const getDevice = (req, res) => {
-  axios.get(baseUrl + "drones").then((xml) => {
-    let json = parser.parse(xml.data);
-    let device = json.report.deviceInformation;
+	axios.get(baseUrl + "drones").then((xml) => {
+		let json = parser.parse(xml.data);
+		let device = json.report.deviceInformation;
 
-    res.send(device);
-  });
+		res.send(device);
+	});
 };
 
 module.exports = getDevice;

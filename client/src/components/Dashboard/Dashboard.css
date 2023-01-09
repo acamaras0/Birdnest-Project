@@ -1,17 +1,17 @@
 .card-header {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
-.icon{
-    width: 30px;
-    height: 30px;
-    color:#383838;
+.icon {
+	width: 30px;
+	height: 30px;
+	color: #383838;
 }
 
 @media screen and (max-width: 900px) {
-  .icon {
-    width: 25px;
-    height: 25px;
-  }
+	.icon {
+		width: 25px;
+		height: 25px;
+	}
 }

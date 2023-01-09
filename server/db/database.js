@@ -8,9 +8,12 @@ const db = mysql.createConnection({
   // host: HOST,
   // password: PASS,
 
+  // user: "root",
+  // host: "localhost",
+  // password: "123456",
   user: "root",
-  host: "localhost",
-  password: "123456",
+  host: "127.0.0.1",
+  password: "",
 });
 
 db.connect(function (err) {
