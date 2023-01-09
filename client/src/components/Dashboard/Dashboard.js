@@ -4,16 +4,17 @@ import { BsPersonFill } from "react-icons/bs";
 import { GiDeliveryDrone } from "react-icons/gi";
 import PilotInfo from "../../models/PilotInfo";
 import DroneInfo from "../../models/DroneInfo";
+import Radar from "../../models/Radar/Radar";
 import "./Dashboard.css";
 
 const Dashboard = ({ socket }) => {
-	const [info, setInfo] = useState([]);
+	const [pilots, setPilots] = useState([]);
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		if (socket) {
 			socket.on("getInfo", (data) => {
-				setInfo(data);
+				setPilots(data);
 			});
 		}
 	}, [socket]);
@@ -24,11 +25,11 @@ const Dashboard = ({ socket }) => {
 		else setShow(true);
 	};
 
-	if (info) {
-		info.sort((a, b) => a.timestamp > b.timestamp);
+	if (pilots) {
+		pilots.sort((a, b) => a.timestamp > b.timestamp);
 	}
 
-	if (info.length === 0) {
+	if (pilots.length === 0) {
 		return (
 			<>
 				<h3 style={{ paddingBottom: "40px", color: "#004849" }}>
@@ -40,14 +41,17 @@ const Dashboard = ({ socket }) => {
 	} else {
 		return (
 			<>
+				<div className="radar-dashboard">
+					<Radar pilots={pilots} />
+				</div>
 				<br />
 				<div className="list">
-					{info &&
-						info.map((pilot) => (
+					{pilots &&
+						pilots.map((pilot) => (
 							<div key={pilot.serialNumber} className="dashboard">
 								<div
 									className="card text-center"
-									style={{ width: "80rem" }}
+									style={{ width: "70rem" }}
 								>
 									<div className="card-header">
 										<ul className="nav nav-pills card-header-pills">

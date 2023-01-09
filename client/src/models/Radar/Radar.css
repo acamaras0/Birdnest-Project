@@ -1,0 +1,71 @@
+.radar,
+.sweep,
+.dots {
+	position: relative;
+}
+.radar {
+	overflow: hidden;
+	top: 50%;
+	left: 50%;
+	margin: -117px;
+	width: 248px;
+	height: 248px;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5),
+		inset 0 0 0 1px hsla(0, 0%, 100%, 0.15);
+	background: repeating-radial-gradient(
+			transparent,
+			transparent 23px,
+			#52f8ed 25px,
+			#61988a 27px
+		),
+		linear-gradient(
+				transparent 49.75%,
+				#0e4c42 49.75%,
+				#0e4c42 50.25%,
+				transparent 50.25%
+			)
+			50% no-repeat,
+		linear-gradient(
+				90deg,
+				transparent 49.75%,
+				#0e4c42 49.75%,
+				#0e4c42 50.25%,
+				transparent 50.25%
+			)
+			50% no-repeat,
+		linear-gradient(#333, #111);
+	background-size: 100%, 218px 218px, 218px 218px, 100%;
+}
+.sweep {
+	box-sizing: border-box;
+	top: 16px;
+	left: 16px;
+	border-right: solid 1px hsla(145, 50%, 40%, 0.3);
+	width: 108px;
+	height: 108px;
+	border-radius: 100% 0 0 0;
+	transform-origin: 100% 100%;
+	background: linear-gradient(
+		50deg,
+		rgba(34, 34, 34, 0) 56%,
+		rgb(6, 239, 235)
+	);
+	animation: sweep 5s infinite linear;
+}
+.dots {
+	width: 100%;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 50%;
+	/* z-index: 99999; */
+}
+@keyframes sweep {
+	to {
+		transform: rotate(360deg);
+	}
+}
