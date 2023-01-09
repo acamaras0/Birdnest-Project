@@ -43,10 +43,20 @@ const socketServer = (server) => {
 					}
 				}
 			});
-			const sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+			let sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
 			db.query(sql, (err, result) => {
 				if (err) throw err;
 				io.emit("getInfo", result);
+			});
+
+			sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+			db.query(sql, (err, result) => {
+				if (err) throw err;
+			});
+
+			sql = `DELETE FROM drones WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+			db.query(sql, (err, result) => {
+				if (err) throw err;
 			});
 		}, 20000);
 	});
