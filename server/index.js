@@ -8,12 +8,12 @@ app.use(cors());
 
 require("dotenv").config();
 const router = require("./routes/router");
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5001;
 
 app.use(router);
 
 socketServer(server);
 
 server.listen(port, () => {
-	console.log(`Listening at http://localhost:${port}/`);
+  console.log(`Listening at http://localhost:${port}/`);
 });

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const getDevice = require("../models/getDevice");
+const getDeviceInfo = require("../models/getDeviceInfo");
 
-router.get("/device", getDevice);
+router.get("/device", getDeviceInfo);
 
 module.exports = router;

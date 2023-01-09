@@ -1,73 +1,102 @@
 .radar,
 .sweep,
 .dots {
-	position: relative;
+  position: relative;
 }
 .radar {
-	overflow: hidden;
-	top: 50%;
-	left: 50%;
-	margin: -117px;
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-	box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5),
-		inset 0 0 0 1px hsla(0, 0%, 100%, 0.15);
-	background: repeating-radial-gradient(
-			transparent,
-			transparent 23px,
-			#52f8ed 25px,
-			#61988a 27px
-		),
-		linear-gradient(
-				transparent 49.75%,
-				#0e4c42 49.75%,
-				#0e4c42 50.25%,
-				transparent 50.25%
-			)
-			50% no-repeat,
-		linear-gradient(
-				90deg,
-				transparent 49.75%,
-				#0e4c42 49.75%,
-				#0e4c42 50.25%,
-				transparent 50.25%
-			)
-			50% no-repeat,
-		linear-gradient(#333, #111);
-	background-size: 100%, 218px 218px, 218px 218px, 100%;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  margin: -117px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5),
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.15);
+  background: repeating-radial-gradient(
+      transparent,
+      transparent 23px,
+      #52f8ed 25px,
+      #61988a 27px
+    ),
+    linear-gradient(
+        transparent 49.75%,
+        #0e4c42 49.75%,
+        #0e4c42 50.25%,
+        transparent 50.25%
+      )
+      50% no-repeat,
+    linear-gradient(
+        90deg,
+        transparent 49.75%,
+        #0e4c42 49.75%,
+        #0e4c42 50.25%,
+        transparent 50.25%
+      )
+      50% no-repeat,
+    linear-gradient(#333, #111);
+  background-size: 100%, 218px 218px, 218px 218px, 100%;
 }
 .sweep {
-	box-sizing: border-box;
-	top: 16px;
-	left: 16px;
-	border-right: solid 1px hsla(145, 50%, 40%, 0.3);
-	width: 108px;
-	height: 108px;
-	border-radius: 100% 0 0 0;
-	transform-origin: 100% 100%;
-	background: linear-gradient(
-		50deg,
-		rgba(34, 34, 34, 0) 56%,
-		rgb(6, 239, 235)
-	);
-	animation: sweep 5s infinite linear;
+  box-sizing: border-box;
+  top: 16px;
+  left: 16px;
+  border-right: solid 1px hsla(145, 50%, 40%, 0.3);
+  width: 108px;
+  height: 108px;
+  border-radius: 100% 0 0 0;
+  transform-origin: 100% 100%;
+  background: linear-gradient(50deg, rgba(34, 34, 34, 0) 56%, rgb(6, 239, 235));
+  animation: sweep 5s infinite linear;
 }
 .dots {
-	width: 100%;
-	margin: 20px;
+  width: 100%;
+  margin: 20px;
 }
 
 .dot {
-	width: 8px;
-	height: 8px;
-	background-color: red;
-	border-radius: 50%;
-	color: aliceblue;
-	font-size: 8px;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  color: aliceblue;
+  font-size: 8px;
+  animation: blink 2s infinite;
 }
+.monitor {
+	width: 500px;
+	height: 500px;
+	background: rgb(0, 0, 0);
+	border:20px solid rgb(0, 0, 0);
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.drone {
+	width: 5px;
+	height: 5px;
+	border-radius: 500px;
+	position: absolute;
+	top: 240px;
+	left: 240px;
+	border: 2px solid white;
+}
+
 @keyframes sweep {
-	to {
-		transform: rotate(360deg);
-	}
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

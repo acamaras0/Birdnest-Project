@@ -8,89 +8,91 @@ import Radar from "../../models/Radar/Radar";
 import "./Dashboard.css";
 
 const Dashboard = ({ socket }) => {
-	const [pilots, setPilots] = useState([]);
-	const [show, setShow] = useState(false);
+  const [pilots, setPilots] = useState([]);
+  const [show, setShow] = useState(false);
 
-	useEffect(() => {
-		if (socket) {
-			socket.on("getInfo", (data) => {
-				setPilots(data);
-			});
-		}
-	}, [socket]);
+  useEffect(() => {
+    if (socket) {
+        socket.on("getInfo", (data) => {
+          setPilots(data);
+        });
+    }
+  }, [socket]);
 
-	const handleClick = (id) => (e) => {
-		e.preventDefault();
-		if (id === 1) setShow(false);
-		else setShow(true);
-	};
+  const handleClick = (id) => (e) => {
+    e.preventDefault();
+    if (id === 1) setShow(false);
+    else setShow(true);
+  };
 
-	if (pilots.length === 0) {
-		return (
-			<>
-				<h3 style={{ paddingBottom: "40px", color: "#004849" }}>
-					Searching for pilots in the NDZ
-				</h3>
-				<Loader type="ball-scale-ripple-multiple" />
-			</>
-		);
-	} else {
-		return (
-			<>
-				<div className="radar-dashboard">
-					<Radar socket={socket} />
-				</div>
-				<br />
-				<div className="list">
-					{pilots &&
-						pilots.map((pilot) => (
-							<div key={pilot.serialNumber} className="dashboard">
-								<div
-									className="card text-center"
-									style={{ width: "70rem" }}
-								>
-									<div className="card-header">
-										<ul className="nav nav-pills card-header-pills">
-											<li
-												className="nav-item text-center"
-												style={{
-													cursor: "pointer",
-													width: "100px",
-												}}
-											>
-												<BsPersonFill
-													onClick={handleClick(1)}
-													className="icon"
-												/>
-											</li>
-											{" . . . "}
-											<li
-												className="nav-item"
-												style={{
-													cursor: "pointer",
-													width: "100px",
-												}}
-											>
-												<GiDeliveryDrone
-													onClick={handleClick(2)}
-													className="icon"
-												/>
-											</li>
-										</ul>
-									</div>
-									{show === false ? (
-										<PilotInfo pilot={pilot} />
-									) : (
-										<DroneInfo pilot={pilot} />
-									)}
-								</div>
-								<br />
-							</div>
-						))}
-				</div>
-			</>
-		);
-	}
+  let final = pilots.filter(
+    (pilot, index, self) =>
+      index === self.findIndex((t) => t.serialNumber === pilot.serialNumber)
+  );
+
+  if (pilots.length === 0) {
+    return (
+      <>
+        <h3 style={{ paddingBottom: "40px", color: "#004849" }}>
+          Searching for pilots in the NDZ
+        </h3>
+        <Loader type="ball-scale-ripple-multiple" />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="radar-dashboard">
+          <Radar socket={socket} />
+        </div>
+        <br />
+        <div className="list">
+          {final &&
+            final.map((pilot) => (
+              <div key={pilot.serialNumber} className="dashboard">
+                <div className="card text-center" style={{ width: "70rem" }}>
+                  <div className="card-header">
+                    <ul className="nav nav-pills card-header-pills">
+                      <li
+                        className="nav-item text-center"
+                        style={{
+                          cursor: "pointer",
+                          width: "100px",
+                        }}
+                      >
+                        <BsPersonFill
+                          onClick={handleClick(1)}
+                          className="icon"
+                        />
+                      </li>
+                      {" . . . "}
+                      <li
+                        className="nav-item"
+                        style={{
+                          cursor: "pointer",
+                          width: "100px",
+                        }}
+                      >
+                        <GiDeliveryDrone
+                          onClick={handleClick(2)}
+                          className="icon"
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                  {show === false ? (
+                    <PilotInfo pilot={pilot} />
+                  ) : (
+                    <DroneInfo pilot={pilot} />
+                  )}
+                </div>
+                <br />
+              </div>
+            ))}
+        </div>
+      </>
+    );
+  }
 };
 
 export default Dashboard;

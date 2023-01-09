@@ -9,13 +9,13 @@ const parser = new XMLParser();
  ** Getting the device information in order to desplay it in the navbar
  **/
 
-const getDevice = (req, res) => {
-	axios.get(baseUrl + "drones").then((xml) => {
-		let json = parser.parse(xml.data);
-		let device = json.report.deviceInformation;
+const getDeviceInfo = (req, res) => {
+  axios.get(baseUrl + "drones").then((xml) => {
+    let json = parser.parse(xml.data);
+    let device = json.report.deviceInformation;
 
-		res.send(device);
-	});
+    res.send(device);
+  });
 };
 
-module.exports = getDevice;
+module.exports = getDeviceInfo;
