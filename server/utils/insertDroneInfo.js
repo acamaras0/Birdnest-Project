@@ -5,7 +5,8 @@ const db = require("../db/database");
  **/
 
 function insertDroneInfo(drone) {
-	let sql = `INSERT INTO drones (serialNumber, model, manufacturer, mac, ipv4, ipv6, firmware) VALUES ('${drone.serialNumber}', '${drone.model}', '${drone.manufacturer}', '${drone.mac}', '${drone.ipv4}', '${drone.ipv6}', '${drone.firmware}') \
+	let sql = `INSERT INTO drones (serialNumber, model, manufacturer, mac, ipv4, ipv6, firmware) VALUES \
+	('${drone.serialNumber}', '${drone.model}', '${drone.manufacturer}', '${drone.mac}', '${drone.ipv4}', '${drone.ipv6}', '${drone.firmware}') \
 	ON DUPLICATE KEY UPDATE serialNumber=serialNumber`;
 
 	db.query(sql, (err, result) => {
