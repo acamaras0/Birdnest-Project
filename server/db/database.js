@@ -4,9 +4,13 @@ const {U, PASS, HOST} = process.env;
 
 // create the connection to database
 const db = mysql.createConnection({
-  user: U,
-  host: HOST,
-  password: PASS,
+  // user: U,
+  // host: HOST,
+  // password: PASS,
+
+  user: "root",
+  host: "localhost",
+  password: "123456",
 });
 
 db.connect(function (err) {

@@ -10,7 +10,7 @@ const Navbar = () => {
   const [deviceInfo, setDeviceInfo] = useState([]);
   useEffect(() => {
     const getDeviceInfo = async () => {
-      const res = await axios.get("http://localhost:3001/device");
+      const res = await axios.get("http://localhost:5001/device");
       setDeviceInfo(res.data);
     };
 

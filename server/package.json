@@ -17,6 +17,7 @@
     "fast-xml-parser": "^4.0.12",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
+    "socket.io": "^4.5.4",
     "xml2json": "^0.12.0"
   }
 }

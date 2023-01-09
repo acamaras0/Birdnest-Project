@@ -9,7 +9,6 @@ const getDevice = (req, res) => {
   axios.get(baseUrl + "drones").then((xml) => {
     let json = parser.parse(xml.data);
     let device = json.report.deviceInformation;
-    console.log(device);
 
     res.send(device);
   });
