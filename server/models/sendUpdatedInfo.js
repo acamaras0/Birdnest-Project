@@ -17,44 +17,51 @@ const db = require("../db/database");
  **/
 
 const sendUpdatedInfo = (io) => {
-  setInterval(() => {
-    axios.get(baseUrl + "drones").then((xml) => {
-      let json = parser.parse(xml.data);
-      let droneInfo = json.report.capture;
-      let serialNumbers = [];
-      let positions = [];
-      for (const drone of droneInfo.drone) {
-        let distance = getDistance(drone.positionX, drone.positionY);
-        if (distance < 100000) {
-          serialNumbers = [...serialNumbers, drone.serialNumber];
-          insertPilotInfo(baseUrl, serialNumbers, distance);
-          insertDroneInfo(drone);
-          positions.push({
-            serialNumber: drone.serialNumber,
-            positionX: drone.positionX,
-            positionY: drone.positionY,
-          });
-          io.emit("radar", positions);
-        }
-      }
-    });
+	setInterval(() => {
+		try {
+			axios.get(baseUrl + "drones").then((xml) => {
+				let json = parser.parse(xml.data);
+				let droneInfo = json.report.capture;
+				let serialNumbers = [];
+				let positions = [];
+				for (const drone of droneInfo.drone) {
+					let distance = getDistance(
+						drone.positionX,
+						drone.positionY
+					);
+					if (distance < 100000) {
+						serialNumbers = [...serialNumbers, drone.serialNumber];
+						insertPilotInfo(baseUrl, serialNumbers, distance);
+						insertDroneInfo(drone);
+						positions.push({
+							serialNumber: drone.serialNumber,
+							positionX: drone.positionX,
+							positionY: drone.positionY,
+						});
+						io.emit("radar", positions);
+					}
+				}
+			});
+		} catch (error) {
+			console.error(error);
+		}
 
-    let sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE) ORDER BY pilots.timestamp DESC`;
-    db.query(sql, (err, result) => {
-      if (err) throw err;
-      io.emit("getInfo", result);
-    });
+		let sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE) ORDER BY pilots.timestamp DESC`;
+		db.query(sql, (err, result) => {
+			if (err) throw err;
+			io.emit("getInfo", result);
+		});
 
-    sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
-    db.query(sql, (err, result) => {
-      if (err) throw err;
-    });
+		sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+		db.query(sql, (err, result) => {
+			if (err) throw err;
+		});
 
-    sql = `DELETE FROM drones WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
-    db.query(sql, (err, result) => {
-      if (err) throw err;
-    });
-  }, 2000);
+		sql = `DELETE FROM drones WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
+		db.query(sql, (err, result) => {
+			if (err) throw err;
+		});
+	}, 2000);
 };
 
 module.exports = sendUpdatedInfo;
