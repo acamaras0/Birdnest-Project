@@ -10,8 +10,9 @@ function insertPilotInfo(baseUrl, serialNumbers, distance) {
 	let pilotInfo = [];
 	if (serialNumbers.length) {
 		serialNumbers.forEach((element) => {
-			try {
-				axios.get(baseUrl + `pilots/` + element).then((res) => {
+			axios
+				.get(baseUrl + `pilots/` + element)
+				.then((res) => {
 					pilotInfo = res.data;
 					let firstname = pilotInfo.firstName.replace("'", "\\'");
 					let lastname = pilotInfo.lastName.replace("'", "\\'");
@@ -21,14 +22,12 @@ function insertPilotInfo(baseUrl, serialNumbers, distance) {
 					let sql = `INSERT INTO pilots (serialNumber, firstname, lastname, phone, email, distance) VALUES ('${element}','${firstname}', '${lastname}', '${email}', '${phone}', '${distance}' ) \
 					ON DUPLICATE KEY UPDATE distance=IF(distance<VALUES(distance),distance,VALUES(distance))`;
 
-					db.query(sql, (err, result) => {
+					db.query(sql, (err) => {
 						if (err) throw err;
-						else console.log("Pilot added/updates");
+						else console.log("Pilot added/updated");
 					});
-				});
-			} catch (error) {
-				console.error(error);
-			}
+				})
+				.catch((error) => (error) => console.error(error));
 		});
 	}
 }

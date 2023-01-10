@@ -10,18 +10,20 @@ const db = require("../db/database");
 
 /**
  ** Every 2 seconds a get request will be done to the XML url
- ** and the pilots (and their drones) that got in the NDZ
- ** will be added to database.
- ** After that the socket will emit the new arrays to be shown to the client
- ** Old pilots/drones will be deleted from the database
+ ** and the pilots (and their drones) that got in the NDZ will be added to database.
+ ** After that the socket will emit the new arrays (i.e positions, deviceInfo and db result) 
+ ** to be shown to the client.
+ ** Old pilots/drones will be deleted from the database.
  **/
 
 const sendUpdatedInfo = (io) => {
 	setInterval(() => {
-		try {
-			axios.get(baseUrl + "drones").then((xml) => {
+		axios
+			.get(baseUrl + "drones")
+			.then((xml) => {
 				let json = parser.parse(xml.data);
 				let droneInfo = json.report.capture;
+				let deviceInfo = json.report.deviceInformation;
 				let serialNumbers = [];
 				let positions = [];
 				for (const drone of droneInfo.drone) {
@@ -38,27 +40,26 @@ const sendUpdatedInfo = (io) => {
 							positionX: drone.positionX,
 							positionY: drone.positionY,
 						});
-						io.emit("radar", positions);
+						io.emit("radarPositions", positions); //used in the radar visualizer
 					}
 				}
-			});
-		} catch (error) {
-			console.error(error);
-		}
+				io.emit("deviceInfo", deviceInfo);//used in the Navbar
+			})
+			.catch((error) => console.error(error));
 
 		let sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.timestamp > DATE_SUB(NOW(), INTERVAL 10 MINUTE) ORDER BY pilots.timestamp DESC`;
 		db.query(sql, (err, result) => {
 			if (err) throw err;
-			io.emit("getInfo", result);
+			io.emit("getInfo", result); // the pilots and their drones
 		});
 
 		sql = `DELETE FROM pilots WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
-		db.query(sql, (err, result) => {
+		db.query(sql, (err) => {
 			if (err) throw err;
 		});
 
 		sql = `DELETE FROM drones WHERE timestamp < DATE_SUB(NOW(), INTERVAL 10 MINUTE)`;
-		db.query(sql, (err, result) => {
+		db.query(sql, (err) => {
 			if (err) throw err;
 		});
 	}, 2000);

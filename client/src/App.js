@@ -10,7 +10,7 @@ const socket = socketIO.connect("http://localhost:5001");
 function App() {
 	return (
 		<>
-			<Navbar />
+			<Navbar socket={socket}/>
 			<div className="App">
 				<Dashboard socket={socket} />
 			</div>

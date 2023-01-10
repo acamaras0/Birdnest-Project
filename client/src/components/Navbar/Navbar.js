@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import drone from "../../assets/drone.svg";
 import { format } from "timeago.js";
 import { MdUpdate, MdTimer, MdBatteryCharging80 } from "react-icons/md";
 import { HiStatusOnline } from "react-icons/hi";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ socket }) => {
 	const [deviceInfo, setDeviceInfo] = useState([]);
 	useEffect(() => {
-		const getDeviceInfo = async () => {
-			const res = await axios.get("http://localhost:5001/device");
-			setDeviceInfo(res.data);
-		};
-
-		getDeviceInfo();
-	}, []);
+		if (socket) {
+			socket.on("deviceInfo", (data) => {
+				setDeviceInfo(data);
+			});
+		}
+	}, [socket]);
 
 	if (deviceInfo) {
 		return (

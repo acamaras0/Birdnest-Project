@@ -9,9 +9,9 @@ function insertDroneInfo(drone) {
 	('${drone.serialNumber}', '${drone.model}', '${drone.manufacturer}', '${drone.mac}', '${drone.ipv4}', '${drone.ipv6}', '${drone.firmware}') \
 	ON DUPLICATE KEY UPDATE serialNumber=serialNumber`;
 
-	db.query(sql, (err, result) => {
+	db.query(sql, (err) => {
 		if (err) throw err;
-		else console.log("Drone added/updates");
+		else console.log("Drone added/updated");
 	});
 }
 

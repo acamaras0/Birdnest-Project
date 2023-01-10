@@ -7,10 +7,7 @@ const cors = require("cors");
 app.use(cors());
 
 require("dotenv").config();
-const router = require("./routes/router");
 const port = process.env.PORT || 5001;
-
-app.use(router);
 
 socketServer(server);
 

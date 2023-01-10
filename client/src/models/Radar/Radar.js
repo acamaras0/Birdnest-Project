@@ -6,7 +6,7 @@ const Radar = ({ socket }) => {
 
 	useEffect(() => {
 		if (socket) {
-			socket.on("radar", (data) => {
+			socket.on("radarPositions", (data) => {
 				setPositions(data);
 			});
 		}
