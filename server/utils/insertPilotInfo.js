@@ -8,7 +8,7 @@ const db = require("../db/database");
 
 function insertPilotInfo(baseUrl, serialNumbers, distance) {
 	let pilotInfo = [];
-	if (serialNumbers) {
+	if (serialNumbers.length) {
 		serialNumbers.forEach((element) => {
 			try {
 				axios.get(baseUrl + `pilots/` + element).then((res) => {
