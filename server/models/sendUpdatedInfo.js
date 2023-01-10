@@ -11,7 +11,7 @@ const db = require("../db/database");
 /**
  ** Every 2 seconds a get request will be done to the XML url
  ** and the pilots (and their drones) that got in the NDZ will be added to database.
- ** After that the socket will emit the new arrays (i.e positions, deviceInfo and db result) 
+ ** After that the socket will emit the new arrays (i.e positions, deviceInfo and db result)
  ** to be shown to the client.
  ** Old pilots/drones will be deleted from the database.
  **/
@@ -43,7 +43,7 @@ const sendUpdatedInfo = (io) => {
 						io.emit("radarPositions", positions); //used in the radar visualizer
 					}
 				}
-				io.emit("deviceInfo", deviceInfo);//used in the Navbar
+				io.emit("deviceInfo", deviceInfo); //used in the Navbar
 			})
 			.catch((error) => console.error(error));
 
