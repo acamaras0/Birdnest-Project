@@ -57,7 +57,7 @@
   border-radius: 50%;
   animation: blink 2s infinite;
 }
-p.serial {
+p.distance-text {
   color: aliceblue;
   font-size: 15px;
 }

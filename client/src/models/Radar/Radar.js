@@ -34,7 +34,7 @@ const Radar = ({ socket }) => {
                     : { backgroundColor: "#52f8edc0" }
                 }
               >
-                <p className="serial">{Math.floor(pilot.distance / 1000)}m</p>
+                <p className="distance-text">{Math.floor(pilot.distance / 1000)}m</p>
               </div>
             </div>
           );
