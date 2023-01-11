@@ -7,29 +7,33 @@ const db = require("../db/database");
  **/
 
 function insertPilotInfo(baseUrl, serialNumbers, distance) {
-	let pilotInfo = [];
-	if (serialNumbers.length) {
-		serialNumbers.forEach((element) => {
-			axios
-				.get(baseUrl + `pilots/` + element)
-				.then((res) => {
-					pilotInfo = res.data;
-					let firstname = pilotInfo.firstName.replace("'", "\\'");
-					let lastname = pilotInfo.lastName.replace("'", "\\'");
-					let email = pilotInfo.email.replace("'", "\\'");
-					let phone = pilotInfo.phoneNumber;
+  let pilotInfo = [];
+  if (serialNumbers.length) {
+    serialNumbers.forEach((element) => {
+      axios
+        .get(baseUrl + `pilots/` + element)
+        .then((res) => {
+          pilotInfo = res.data;
+          let firstname = pilotInfo.firstName;
+          let lastname = pilotInfo.lastName;
+          let email = pilotInfo.email;
+          let phone = pilotInfo.phoneNumber;
 
-					let sql = `INSERT INTO pilots (serialNumber, firstname, lastname, phone, email, distance) VALUES ('${element}','${firstname}', '${lastname}', '${email}', '${phone}', '${distance}' ) \
-					ON DUPLICATE KEY UPDATE distance=IF(distance<VALUES(distance),distance,VALUES(distance))`;
+          let sql = `INSERT INTO pilots (serialNumber, firstname, lastname, phone, email, distance) VALUES ($1,$2,$3, $4, $5, $6) \
+					ON CONFLICT (serialNumber) DO UPDATE SET distance=$6, time=NOW() WHERE pilots.distance > $6 AND pilots.serialNumber=$1`;
 
-					db.query(sql, (err) => {
-						if (err) throw err;
-						else console.log("Pilot added/updated");
-					});
-				})
-				.catch((error) => (error) => console.error(error));
-		});
-	}
+          db.query(
+            sql,
+            [element, firstname, lastname, email, phone, distance],
+            (err) => {
+              if (err) throw err;
+              else console.log("Pilot added/updated");
+            }
+          );
+        })
+        .catch((error) => (error) => console.error(error));
+    });
+  }
 }
 
 module.exports = insertPilotInfo;

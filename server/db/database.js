@@ -1,48 +1,35 @@
-const mysql = require("mysql2");
+const Pool = require("pg").Pool;
 require("dotenv").config();
 
-/**
- **  Create the connection to database and the tables
- **/
-
-const db = mysql.createConnection({
-	user: process.env.U,
-	host: process.env.HOST,
-	password: process.env.PASS,
+const db = new Pool({
+  user: "postgres",
+  host: "localhost",
+  password: "123456",
+  database: "drones_db",
+  port: 5432,
 });
 
-db.connect(function (err) {
-	if (err) throw err;
-	console.log("Connected!");
+db.connect();
 
-	db.query("CREATE DATABASE IF NOT EXISTS drones_db", (err, result) => {
-		if (err) throw err;
-		if (result.affectedRows === 0) console.log("Database already exists!");
-		else console.log("Database created!");
-	});
-
-	db.query("USE drones_db", (err, result) => {
-		if (err) throw err;
-		console.log("Using drones_db.");
-	});
-
-	db.query(
-		"CREATE TABLE IF NOT EXISTS pilots (serialNumber VARCHAR(255) PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255) , email VARCHAR(255), phone VARCHAR(255), distance DOUBLE ,timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)",
-		(err, result) => {
-			if (err) throw err;
-			if (result.affectedRows === 0) console.log("Table already exists!");
-			else console.log("Pilots table created!");
-		}
-	);
-
-	db.query(
-		"CREATE TABLE IF NOT EXISTS drones (serialNumber VARCHAR(255) PRIMARY KEY, model VARCHAR(255), manufacturer VARCHAR(255), mac VARCHAR(255), ipv4 VARCHAR(255), ipv6 VARCHAR(255), firmware VARCHAR(255), timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)",
-		(err, result) => {
-			if (err) throw err;
-			if (result.affectedRows === 0) console.log("Table already exists!");
-			else console.log("Drones table created!");
-		}
-	);
+db.query("CREATE DATABASE drones_db;", (err, res) => {
+  if (err) console.log(err);
+  console.log("drones_db created!");
 });
+
+db.query(
+  "CREATE TABLE IF NOT EXISTS pilots (serialNumber VARCHAR(255) PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), email VARCHAR(255), phone VARCHAR(255), distance DOUBLE PRECISION, time timestamp with time zone default current_timestamp);",
+  (err) => {
+    if (err) console.log(err);
+    else console.log("pilots table created!");
+  }
+);
+
+db.query(
+  "CREATE TABLE IF NOT EXISTS drones (serialNumber VARCHAR(255) PRIMARY KEY, model VARCHAR(255), manufacturer VARCHAR(255), mac VARCHAR(255), ipv4 VARCHAR(255), ipv6 VARCHAR(255), firmware VARCHAR(255), time timestamp with time zone default current_timestamp);",
+  (err) => {
+    if (err) console.log(err);
+    else console.log("drones table created!");
+  }
+);
 
 module.exports = db;

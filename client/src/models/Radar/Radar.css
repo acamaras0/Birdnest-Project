@@ -1,96 +1,93 @@
 .radar,
 .sweep,
 .dots {
-	position: relative;
+  position: relative;
 }
 .radar {
-	overflow: hidden;
-	top: 50%;
-	left: 50%;
-	margin: -117px;
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-	box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5),
-		inset 0 0 0 1px hsla(0, 0%, 100%, 0.15);
-	background: repeating-radial-gradient(
-			transparent,
-			transparent 23px,
-			#52f8ed 25px,
-			#61988a 27px
-		),
-		linear-gradient(
-				transparent 49.75%,
-				#0e4c42 49.75%,
-				#0e4c42 50.25%,
-				transparent 50.25%
-			)
-			50% no-repeat,
-		linear-gradient(
-				90deg,
-				transparent 49.75%,
-				#0e4c42 49.75%,
-				#0e4c42 50.25%,
-				transparent 50.25%
-			)
-			50% no-repeat,
-		linear-gradient(#333, #111);
-	background-size: 100%, 218px 218px, 218px 218px, 100%;
+  overflow: hidden;
+  margin: -117px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.5),
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.15);
+  background: repeating-radial-gradient(
+      transparent,
+      transparent 45px,
+      #52f8edc0 50px,
+      #61988a 50px
+    ),
+    linear-gradient(
+        transparent 49.75%,
+        #0e4c42 49.75%,
+        #0e4c42 50.25%,
+        transparent 50.25%
+      )
+      50% no-repeat,
+    linear-gradient(
+        90deg,
+        transparent 49.75%,
+        #0e4c42 49.75%,
+        #0e4c42 50.25%,
+        transparent 50.25%
+      )
+      50% no-repeat,
+    linear-gradient(#333, #111);
+  background-size: 100%, 500px 500px, 500px 500px, 100%;
 }
 .sweep {
-	box-sizing: border-box;
-	top: 16px;
-	left: 16px;
-	border-right: solid 1px hsla(145, 50%, 40%, 0.3);
-	width: 108px;
-	height: 108px;
-	border-radius: 100% 0 0 0;
-	transform-origin: 100% 100%;
-	background: linear-gradient(
-		50deg,
-		rgba(34, 34, 34, 0) 56%,
-		rgb(6, 239, 235)
-	);
-	animation: sweep 5s infinite linear;
+  box-sizing: border-box;
+  border-right: solid 1px hsla(145, 50%, 40%, 0.3);
+  width: 250px;
+  height: 250px;
+  border-radius: 100% 0 0 0;
+  transform-origin: 100% 100%;
+  background: linear-gradient(50deg, rgba(34, 34, 34, 0) 56%, rgb(6, 239, 235));
+  animation: sweep 5s infinite linear;
 }
 .dots {
-	width: 100%;
-	margin: 150px;
-	position: absolute;
+  width: 100%;
+  position: absolute;
 }
 
 .dot {
-	position: relative;
-	width: 8px;
-	height: 8px;
-	background-color: red;
-	border-radius: 50%;
-	animation: blink 2s infinite;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  flex-direction: row-reverse;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: blink 2s infinite;
 }
 p.serial {
-	color: aliceblue;
-	font-size: 8px;
+  color: aliceblue;
+  font-size: 15px;
 }
 
 @keyframes sweep {
-	to {
-		transform: rotate(360deg);
-	}
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes blink {
-	0% {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sweep {
+    display: none;
+  }
+  .dot {
+    display: none;
+  }
+  .radar {
+    display: none;
+  }
 }

@@ -8,15 +8,15 @@ import socketIO from "socket.io-client";
 const socket = socketIO.connect("http://localhost:5001");
 
 function App() {
-	return (
-		<>
-			<Navbar socket={socket}/>
-			<div className="App">
-				<Dashboard socket={socket} />
-			</div>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar socket={socket} />
+      <div className="App">
+        <Dashboard socket={socket} />
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 export default App;

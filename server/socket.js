@@ -1,4 +1,3 @@
-const db = require("./db/database.js");
 const { Server } = require("socket.io");
 
 const sendUpdatedInfo = require("./models/sendUpdatedInfo");
@@ -9,12 +8,12 @@ const sendUpdatedInfo = require("./models/sendUpdatedInfo");
  **/
 
 const socketServer = (server) => {
-	const io = new Server(server, {
-		cors: {
-			origin: "http://localhost:3000",
-		},
-	});
-	sendUpdatedInfo(io);
+  const io = new Server(server, {
+    cors: {
+      origin: "http://localhost:3000",
+    },
+  });
+  sendUpdatedInfo(io);
 };
 
 module.exports = socketServer;

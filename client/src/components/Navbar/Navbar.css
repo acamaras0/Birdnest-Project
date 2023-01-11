@@ -1,41 +1,41 @@
 .nav-logo {
-	height: 8vmin;
-	pointer-events: none;
+  height: 8vmin;
+  pointer-events: none;
 }
 
 .nav-icon {
-	width: 25px;
-	height: 25px;
-	margin-right: 0.5vw;
-	margin-left: 0.5vw;
-	margin-bottom: 2px;
-	color: #00babb;
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5vw;
+  margin-left: 0.5vw;
+  margin-bottom: 2px;
+  color: #00babb;
 }
 
 @media screen and (max-width: 900px) {
-	.nav-icon {
-		width: 15px;
-		height: 15px;
-	}
-	.navbar-text {
-		font-size: 0.9rem;
-	}
-	span.navbar-brand.mb-0.h1 {
-		font-size: 1rem;
-	}
+  .nav-icon {
+    width: 15px;
+    height: 15px;
+  }
+  .navbar-text {
+    font-size: 0.9rem;
+  }
+  span.navbar-brand.mb-0.h1 {
+    font-size: 1rem;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-	.nav-logo {
-		animation: nav-logo-spin infinite 5s linear;
-	}
+  .nav-logo {
+    animation: nav-logo-spin infinite 5s linear;
+  }
 }
 
 @keyframes nav-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
