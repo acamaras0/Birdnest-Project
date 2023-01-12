@@ -46,8 +46,12 @@
   animation: sweep 5s infinite linear;
 }
 .dots {
-  width: 100%;
   position: absolute;
+  animation: blink 2s infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .dot {
@@ -55,9 +59,8 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  animation: blink 2s infinite;
 }
-p.distance-text {
+.distance-text {
   color: aliceblue;
   font-size: 15px;
 }
