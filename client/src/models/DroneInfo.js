@@ -8,6 +8,9 @@ const DroneInfo = ({ pilot }) => {
         Model: {pilot.model}{" "}
       </p>
       <p className="card-text" style={{ color: "#007172" }}>
+        Manufacturer: {pilot.manufacturer}
+      </p>
+      <p className="card-text" style={{ color: "#007172" }}>
         Ipv4: {pilot.ipv4}
       </p>
       <p className="card-text" style={{ color: "#007172" }}>
@@ -18,9 +21,6 @@ const DroneInfo = ({ pilot }) => {
       </p>
       <p className="card-text" style={{ color: "#007172" }}>
         Firmware: {pilot.firmware}
-      </p>
-      <p className="card-text" style={{ color: "#007172" }}>
-        Manufacturer: {pilot.manufacturer}
       </p>
     </div>
   );
