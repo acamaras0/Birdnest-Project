@@ -1,12 +1,14 @@
-.card-header {
-  display: flex;
-  justify-content: center;
+.d-flex {
+  font-size: 12px;
+  cursor: pointer;
+  color: #383838;
 }
 
 .icon {
   width: 30px;
   height: 30px;
-  color: #383838;
+  margin-right: 25px;
+  margin-left: 25px;
 }
 
 .radar-dashboard {

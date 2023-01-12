@@ -5,6 +5,7 @@ import { GiDeliveryDrone } from "react-icons/gi";
 import PilotInfo from "../../models/PilotInfo";
 import DroneInfo from "../../models/DroneInfo";
 import Radar from "../../models/Radar/Radar";
+import { motion } from "framer-motion";
 import "./Dashboard.css";
 
 const Dashboard = ({ socket }) => {
@@ -42,39 +43,28 @@ const Dashboard = ({ socket }) => {
         </div>
         <br />
         <div className="list w-75">
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{ marginBottom: "20px" }}
+          >
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <BsPersonFill onClick={handleClick(1)} className="icon" />
+              <p>Pilots</p>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <GiDeliveryDrone onClick={handleClick(2)} className="icon" />
+              <p>Drones</p>
+            </motion.div>
+          </div>
           {pilots &&
             pilots.map((pilot) => (
-              <div key={pilot.serialnumber} className="dashboard">
+              <motion.div
+                whileInView={{ opacity: [0.5, 1] }}
+                transition={{ duration: 0.7 }}
+                className="dashboard"
+                key={pilot.serialnumber}
+              >
                 <div className="card text-center">
-                  <div className="card-header">
-                    <ul className="nav nav-pills card-header-pills">
-                      <li
-                        className="nav-item text-center"
-                        style={{
-                          cursor: "pointer",
-                          width: "100px",
-                        }}
-                      >
-                        <BsPersonFill
-                          onClick={handleClick(1)}
-                          className="icon"
-                        />
-                      </li>
-                      {" . . . "}
-                      <li
-                        className="nav-item"
-                        style={{
-                          cursor: "pointer",
-                          width: "100px",
-                        }}
-                      >
-                        <GiDeliveryDrone
-                          onClick={handleClick(2)}
-                          className="icon"
-                        />
-                      </li>
-                    </ul>
-                  </div>
                   {show === false ? (
                     <PilotInfo pilot={pilot} />
                   ) : (
@@ -82,7 +72,7 @@ const Dashboard = ({ socket }) => {
                   )}
                 </div>
                 <br />
-              </div>
+              </motion.div>
             ))}
         </div>
       </>
