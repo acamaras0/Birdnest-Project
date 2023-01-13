@@ -6,7 +6,7 @@
 *Unfortunately some enthusiasts have been a little too curious about this elusive bird species, flying their drones very close to the nest for rare photos and bothering the birds in the process.*
 *To preserve the nesting peace, authorities have declared the area within 100 meters of the nest a no drone zone (NDZ).*
 
-**Birdy** is a drone surveillance website, that displays the contact informations and the drone informations of all the pilots that entered the NDZ
+**Birdy** is a drone surveillance website, that displays the contact informations and the drone informations of all the pilots that entered the NDZ. The information is updated every 2 seconds and is kept for 10 minutes.
 
 ### Stack
 
@@ -14,6 +14,9 @@
 - React
 - PostgreSQL
 - Socket.Io
+- Bootstrap
+- CSS / SAAS
+
 
 ### Preview
 
