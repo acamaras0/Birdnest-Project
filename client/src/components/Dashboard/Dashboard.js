@@ -42,7 +42,7 @@ const Dashboard = ({ socket }) => {
           <Radar socket={socket} />
         </div>
         <br />
-        <div className="list w-75">
+        <div className="list w-50">
           <div
             className="d-flex align-items-center justify-content-center"
             style={{ marginBottom: "20px" }}
