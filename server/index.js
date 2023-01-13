@@ -6,7 +6,7 @@ const socketServer = require("./socket.js");
 const cors = require("cors");
 app.use(
   cors({
-    origin: "https://birdnest-client-0et7.onrender.com/",
+    origin: "https://*.onrender.com",
   })
 );
 
