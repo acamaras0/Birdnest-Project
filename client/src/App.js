@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import "./App.scss";
 
 import socketIO from "socket.io-client";
-const socket = socketIO.connect("https://birdnest-server-6dxs.onrender.com");
+const socket = socketIO.connect("https://*.onrender.com");
 
 function App() {
   return (
