@@ -10,7 +10,7 @@ const sendUpdatedInfo = require("./models/sendUpdatedInfo");
 const socketServer = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: "https://birdnest-client-0et7.onrender.com/",
     },
   });
   sendUpdatedInfo(io);
