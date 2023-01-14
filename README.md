@@ -25,7 +25,7 @@ The navbar contains the surveillance device information, such as:
 - PostgreSQL
 - Socket.Io
 - Bootstrap
-- CSS / SAAS
+- CSS / SCSS
 
 
 ### Preview
