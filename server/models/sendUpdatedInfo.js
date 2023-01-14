@@ -38,8 +38,8 @@ const sendUpdatedInfo = (io) => {
             serialNumbers = [...serialNumbers, drone.serialNumber];
             insertPilotInfo(baseUrl, serialNumbers, distance);
             insertDroneInfo(drone);
-            io.emit("radarPositions", radarData); //used in the radar visualizer
           }
+          io.emit("radarPositions", radarData); //used in the radar visualizer
         }
         io.emit("deviceInfo", deviceInfo); //used in the Navbar
       })
