@@ -1,12 +1,14 @@
 const axios = require("axios");
 const { XMLParser } = require("fast-xml-parser");
 const parser = new XMLParser();
-const baseUrl = "https://assignments.reaktor.com/birdnest/";
 
+const getPilot = require("./getPilot");
+const insertDrone = require("../db/insertDrone");
 const getDistance = require("../utils/getDistance");
-const insertPilotInfo = require("../utils/insertPilotInfo");
-const insertDroneInfo = require("../utils/insertDroneInfo");
-const db = require("../db/database");
+const deleteData = require("../db/deleteData");
+const getNDZinfo = require("../db/getNDZinfo");
+
+const baseUrl = "https://assignments.reaktor.com/birdnest/";
 
 /**
  ** Every 2 seconds a get request will be done to the XML url
@@ -36,8 +38,8 @@ const sendUpdatedInfo = (io) => {
           });
           if (distance < 100000) {
             serialNumbers = [...serialNumbers, drone.serialNumber];
-            insertPilotInfo(baseUrl, serialNumbers, distance);
-            insertDroneInfo(drone);
+            getPilot(baseUrl, serialNumbers, distance);
+            insertDrone(drone);
           }
           io.emit("radarPositions", radarData); //used in the radar visualizer
         }
@@ -45,23 +47,13 @@ const sendUpdatedInfo = (io) => {
       })
       .catch((error) => console.error(error));
 
-    let sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.time > NOW() - INTERVAL '10 MINUTES' ORDER BY pilots.time DESC`;
-    db.query(sql, (err, result) => {
-      if (err) console.error(err);
-      if (result && result.rows.length > 0) {
-        io.emit("getInfo", result.rows); // the pilots and their drones
+    getNDZinfo((data) => {
+      if (data && data.length > 0) {
+        io.emit("getInfo", data); // the pilots and their drones
       }
     });
 
-    sql = `DELETE FROM pilots WHERE time < NOW() - INTERVAL '10 MINUTES'`;
-    db.query(sql, (err) => {
-      if (err) console.error(err);
-    });
-
-    sql = `DELETE FROM drones WHERE time < NOW() - INTERVAL '10 MINUTES'`;
-    db.query(sql, (err) => {
-      if (err) console.error(err);
-    });
+    deleteData();
   }, 2000);
 };
 
