@@ -31,7 +31,7 @@ function insertPilotInfo(baseUrl, serialNumbers, distance) {
             }
           );
         })
-        .catch((error) => (error) => console.error(error));
+        .catch((error) => console.error(error));
     });
   }
 }
