@@ -48,7 +48,9 @@ const sendUpdatedInfo = (io) => {
     let sql = `SELECT * FROM pilots INNER JOIN drones ON pilots.serialNumber = drones.serialNumber WHERE pilots.time > NOW() - INTERVAL '10 MINUTES' ORDER BY pilots.time DESC`;
     db.query(sql, (err, result) => {
       if (err) console.error(err);
-      io.emit("getInfo", result.rows); // the pilots and their drones
+      if (result && result.rows.length > 0) {
+        io.emit("getInfo", result.rows); // the pilots and their drones
+      }
     });
 
     sql = `DELETE FROM pilots WHERE time < NOW() - INTERVAL '10 MINUTES'`;
