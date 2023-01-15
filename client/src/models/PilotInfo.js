@@ -8,17 +8,21 @@ const PilotInfo = ({ pilot }) => {
           {pilot.firstname} {pilot.lastname}
         </h5>
       </div>
-      <div className="card-text" style={{ color: "#007172" }}>
-        {pilot.phone}
+      <div>
+        <p className="card-text" style={{ color: "#007172" }}>
+          {pilot.phone}
+        </p>
         <p className="card-text" style={{ color: "#007172" }}>
           {pilot.email}
         </p>
       </div>
-      <div className="card-text" style={{ color: "#7a8484", fontSize: "15px" }}>
+      <div>
         <p className="card-text" style={{ color: "#ae3e07", fontSize: "17px" }}>
           {Math.round(pilot.distance / 1000)}m away
         </p>
-        {format(pilot.time)}
+        <p className="card-text" style={{ color: "#7a8484", fontSize: "15px" }}>
+          {format(pilot.time)}
+        </p>
       </div>
     </div>
   );
