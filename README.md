@@ -16,7 +16,7 @@ The navbar contains the surveillance device information, such as:
 - listening range
 - when the device was last time started
 - the update interval
-- BONUS: the battery procentage (which is not given, but I figured it would look nice especially when opened on small devices)
+- BONUS: the battery percentage (which is not given by the API, but I figured it would look nice especially when opened on small devices)
 
 ### Stack
 
