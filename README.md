@@ -27,6 +27,22 @@ The navbar contains the surveillance device information, such as:
 - Bootstrap
 - CSS / SCSS
 
+### Usage
+
+In order to start this project:
+
+1. In the **server** directory, run:
+
+- npm install
+- nodemon index.js
+
+2. Separately, in the **client** directory, run:
+
+- npm install
+- npm start
+
+The app will be available at http://localhost:3000/ .
+
 
 ### Preview
 
