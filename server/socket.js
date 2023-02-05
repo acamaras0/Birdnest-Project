@@ -1,6 +1,6 @@
 const { Server } = require("socket.io");
 
-const sendUpdatedInfo = require("./models/sendUpdatedInfo");
+const sendUpdatedInfo = require("./controllers/sendUpdatedInfo");
 
 /**
  ** In order to get less network request, I decided to pass the

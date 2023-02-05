@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Loader from "react-loaders";
 import { BsPersonFill } from "react-icons/bs";
 import { GiDeliveryDrone } from "react-icons/gi";
-import PilotInfo from "../../models/PilotInfo";
-import DroneInfo from "../../models/DroneInfo";
-import Radar from "../../models/Radar/Radar";
+import PilotInfo from "../PilotInfo";
+import DroneInfo from "../DroneInfo";
+import Radar from "../Radar/Radar";
 import { motion } from "framer-motion";
 import "./Dashboard.css";
 
